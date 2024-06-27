@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Data", "src\Rubyte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Json", "src\Rubytech.Json\Rubytech.Json.csproj", "{574D907B-22F2-4E82-AA38-F9372A632B6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Abstractions", "src\Rubytech.Abstractions\Rubytech.Abstractions.csproj", "{C8B89D03-696F-4FB5-8FEC-34BB9666AF91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{574D907B-22F2-4E82-AA38-F9372A632B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{574D907B-22F2-4E82-AA38-F9372A632B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{574D907B-22F2-4E82-AA38-F9372A632B6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B89D03-696F-4FB5-8FEC-34BB9666AF91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B89D03-696F-4FB5-8FEC-34BB9666AF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B89D03-696F-4FB5-8FEC-34BB9666AF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B89D03-696F-4FB5-8FEC-34BB9666AF91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3EB89FB7-731D-4A60-B945-042B8DE1562D} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 		{574D907B-22F2-4E82-AA38-F9372A632B6D} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
+		{C8B89D03-696F-4FB5-8FEC-34BB9666AF91} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3952699C-8BB3-4ADA-B8DB-81F0AB800EB0}
