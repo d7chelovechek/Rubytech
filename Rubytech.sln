@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Network", "src\Rub
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Providers", "src\Rubytech.Providers\Rubytech.Providers.csproj", "{A81ED696-5A81-460D-B9E7-53418F9213EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Lib", "src\Rubytech.Lib\Rubytech.Lib.csproj", "{7ECA5C25-2FDF-454C-A439-504653C0D3ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{A81ED696-5A81-460D-B9E7-53418F9213EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A81ED696-5A81-460D-B9E7-53418F9213EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A81ED696-5A81-460D-B9E7-53418F9213EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ECA5C25-2FDF-454C-A439-504653C0D3ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ECA5C25-2FDF-454C-A439-504653C0D3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ECA5C25-2FDF-454C-A439-504653C0D3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ECA5C25-2FDF-454C-A439-504653C0D3ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{C8B89D03-696F-4FB5-8FEC-34BB9666AF91} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 		{45B86A90-80DA-4597-8F8E-6F2D7398970D} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 		{A81ED696-5A81-460D-B9E7-53418F9213EE} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
+		{7ECA5C25-2FDF-454C-A439-504653C0D3ED} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3952699C-8BB3-4ADA-B8DB-81F0AB800EB0}
