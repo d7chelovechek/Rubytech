@@ -1,4 +1,4 @@
-﻿namespace Rubytech.Abstractions.BaseObjects
+﻿namespace Rubytech.Abstractions
 {
     public abstract class BaseDisposable : IDisposable
     {

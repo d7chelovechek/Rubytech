@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Rubytech.Data.Models;
+using Rubytech.Json.SerializationOptions;
 using Rubytech.Lib.Exceptions;
 using System.Text.Json;
 
@@ -32,7 +33,9 @@ namespace Rubytech.Lib.ValidatorsExtensions
             {
                 if (employee.StartDate is null)
                 {
-                    string jsonEmployee = JsonSerializer.Serialize(employee);
+                    string jsonEmployee = JsonSerializer.Serialize(
+                        employee, 
+                        RubytechWriteSerializationOptions.Value);
 
                     logger?.LogInformation("У сотрудника отсутствует дата приема на работу: {JSON}", jsonEmployee);
 

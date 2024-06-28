@@ -5,6 +5,7 @@ namespace Rubytech.Providers.Dtos
 {
     public class UnitDto
     {
+        [JsonConverter(typeof(LongConverter))]
         public long Id { get; set; }
         [JsonConverter(typeof(StringToNullableLongConverter))]
         public long? ParentId { get; set; }

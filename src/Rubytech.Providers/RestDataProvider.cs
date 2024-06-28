@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Rubytech.Abstractions.BaseObjects;
+using Rubytech.Abstractions;
 using Rubytech.Data.Models;
 using Rubytech.Json.SerializationOptions;
 using Rubytech.Network.Clients;
@@ -24,7 +24,7 @@ namespace Rubytech.Providers
             {
                 BaseUri = new Uri(uriString),
                 Authentication = new BasicAuthenticationHeaderValue(userName, password),
-                SerializationOptions = RubytechJsonSerializationOptions.Value
+                SerializationOptions = RubytechReadSerializationOptions.Value
             });
         }
 

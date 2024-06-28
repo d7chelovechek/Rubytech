@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Rubytech.Constants\Rubytech.Constants.csproj" />
     <ProjectReference Include="..\Rubytech.Data\Rubytech.Data.csproj" />
     <ProjectReference Include="..\Rubytech.Json\Rubytech.Json.csproj" />
     <ProjectReference Include="..\Rubytech.Network\Rubytech.Network.csproj" />

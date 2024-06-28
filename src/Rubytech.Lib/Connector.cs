@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using Rubytech.Abstractions.BaseObjects;
+using Rubytech.Abstractions;
 using Rubytech.Archivers;
+using Rubytech.Archivers.Constants;
 using Rubytech.Archivers.Interfaces;
 using Rubytech.Data.Models;
 using Rubytech.Lib.Exceptions;
@@ -56,9 +57,9 @@ namespace Rubytech.Lib
         {
             IEnumerable<Task> tasks =
             [
-                dataArchiver.AddDataToEntryAsync(_employees, "employees.json"),
-                dataArchiver.AddDataToEntryAsync(_positions, "positions.json"),
-                dataArchiver.AddDataToEntryAsync(_units, "units.json")
+                dataArchiver.AddDataToEntryAsync(_employees, FileName.Employees),
+                dataArchiver.AddDataToEntryAsync(_positions, FileName.Positions),
+                dataArchiver.AddDataToEntryAsync(_units, FileName.Units)
             ];
 
             await Task.WhenAll(tasks);

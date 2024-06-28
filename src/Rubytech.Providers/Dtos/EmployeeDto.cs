@@ -6,6 +6,7 @@ namespace Rubytech.Providers.Dtos
 {
     public class EmployeeDto
     {
+        [JsonConverter(typeof(LongConverter))]
         public long Id { get; set; }
 
         [JsonConverter(typeof(LongToStringConverter))]
@@ -17,7 +18,7 @@ namespace Rubytech.Providers.Dtos
 
         [JsonIgnore]
         public string FullName =>
-            $"{LastName} {FirstName} {Patronymic}";
+            string.Join(' ', LastName, FirstName, Patronymic);
 
         [JsonIgnore]
         public WorkStatus Status =>

@@ -1,4 +1,4 @@
-﻿using Rubytech.Abstractions.BaseObjects;
+﻿using Rubytech.Abstractions;
 using Rubytech.Archivers.Interfaces;
 using Rubytech.Json.SerializationOptions;
 using Rubytech.TimeProviders.Interfaces;
@@ -16,11 +16,6 @@ namespace Rubytech.Archivers
 
         public ZipDataArchiver(string directoryPath, ITimeProvider timeProvider)
         {
-            if (!Directory.Exists(directoryPath))
-            {
-                throw new DirectoryNotFoundException("Директория не существует.");
-            }
-
             string fileName = string.Join(
                 '.', 
                 timeProvider.GetCurrentDateTimeInISO8601(), 

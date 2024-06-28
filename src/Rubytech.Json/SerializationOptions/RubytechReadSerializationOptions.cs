@@ -2,7 +2,7 @@
 
 namespace Rubytech.Json.SerializationOptions
 {
-    public static class RubytechJsonSerializationOptions
+    public static class RubytechReadSerializationOptions
     {
         public static JsonSerializerOptions Value => _value;
 

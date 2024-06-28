@@ -1,4 +1,4 @@
-﻿using Rubytech.Abstractions.BaseObjects;
+﻿using Rubytech.Abstractions;
 using Rubytech.Network.Options;
 using System.Text.Json;
 
