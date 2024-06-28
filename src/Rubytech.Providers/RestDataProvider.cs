@@ -11,10 +11,19 @@ using Rubytech.Providers.Mappers;
 
 namespace Rubytech.Providers
 {
+    /// <summary>
+    /// Поставщик данных из удаленного источника.
+    /// </summary>
     public class RestDataProvider : BaseDisposable, IDataProvider
     {
         private readonly RestClient _client;
 
+        /// <summary>
+        /// Инициализация поставщика данных.
+        /// </summary>
+        /// <param name="uriString">Базовый идентификатор ресурса.</param>
+        /// <param name="userName">Имя пользователя для аутентификации.</param>
+        /// <param name="password">Пароль для аутентицикации.</param>
         public RestDataProvider(
             string uriString,
             string userName,
@@ -28,27 +37,39 @@ namespace Rubytech.Providers
             });
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployeesAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Employee>> GetEmployeesAsync(
+            CancellationToken cancellationToken)
         {
-            var employees = await _client.GetAsync<IEnumerable<EmployeeDto>>(Endpoint.Employees, cancellationToken);
+            // Получаем сотрудников из удаленного источника, маппим их и отдаем.
+            var employees = await _client.GetAsync<IEnumerable<EmployeeDto>>(
+                Endpoint.Employees, 
+                cancellationToken);
 
             Mapper mapper = MapperInitializator.InitializeEmployeeMapper();
 
             return employees?.Select(mapper.Map<Employee>) ?? [];
         }
 
-        public async Task<IEnumerable<Position>> GetPositionsAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Position>> GetPositionsAsync(
+            CancellationToken cancellationToken)
         {
-            var positions = await _client.GetAsync<IEnumerable<PositionDto>>(Endpoint.Positions, cancellationToken);
+            // Получаем должности из удаленного источника, маппим их и отдаем.
+            var positions = await _client.GetAsync<IEnumerable<PositionDto>>(
+                Endpoint.Positions, 
+                cancellationToken);
 
             Mapper mapper = MapperInitializator.InitializePositionMapper();
 
             return positions?.Select(mapper.Map<Position>) ?? [];
         }
 
-        public async Task<IEnumerable<Unit>> GetUnitsAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Unit>> GetUnitsAsync(
+            CancellationToken cancellationToken)
         {
-            var units = await _client.GetAsync<IEnumerable<UnitDto>>(Endpoint.Units, cancellationToken);
+            // Получаем подразделения из удаленного источника, маппим их и отдаем.
+            var units = await _client.GetAsync<IEnumerable<UnitDto>>(
+                Endpoint.Units, 
+                cancellationToken);
 
             Mapper mapper = MapperInitializator.InitializeUnitMapper();
 

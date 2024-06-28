@@ -2,6 +2,9 @@
 
 namespace Rubytech.TimeProviders
 {
+    /// <summary>
+    /// Предоставляет поставщика времени в Московском часовом поясе.
+    /// </summary>
     public class MoscowTimeProvider : ITimeProvider
     {
         private readonly TimeProvider _timeProvider;
@@ -15,6 +18,7 @@ namespace Rubytech.TimeProviders
 
         public string GetCurrentDateTimeInISO8601()
         {
+            // .ToString("o") нам не подходит, так как там присутствуют недопустивые для имени файла символы.
             return string.Join(
                 '+',
                 (_timeProvider.GetUtcNow() + _offset).ToString("yyyyMMdd'T'HHmmss"),

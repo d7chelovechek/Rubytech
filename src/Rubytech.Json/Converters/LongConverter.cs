@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace Rubytech.Json.Converters
 {
+    /// <summary>
+    /// Json конвертер для получение <see cref="long"/>
+    /// </summary>
     public class LongConverter : JsonConverter<long>
     {
         public override long Read(
@@ -11,6 +14,7 @@ namespace Rubytech.Json.Converters
             Type typeToConvert, 
             JsonSerializerOptions options)
         {
+            // Если токен число и мы можем его получить.
             if (reader.TokenType is JsonTokenType.Number &&
                 reader.TryGetInt64(out long value))
             {

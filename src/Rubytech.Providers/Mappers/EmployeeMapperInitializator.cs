@@ -4,8 +4,15 @@ using Rubytech.Providers.Dtos;
 
 namespace Rubytech.Providers.Mappers
 {
+    /// <summary>
+    /// Инициализатор маппера данных.
+    /// </summary>
     public static partial class MapperInitializator
     {
+        /// <summary>
+        /// Инициализоровать маппер для сотрудников.
+        /// </summary>
+        /// <returns>Маппер данных для сотрудников.</returns>
         public static Mapper InitializeEmployeeMapper()
         {
             var configuration = new MapperConfiguration(config =>

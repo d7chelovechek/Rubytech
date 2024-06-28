@@ -13,6 +13,9 @@ using Rubytech.TimeProviders;
 
 namespace Rubytech.Lib
 {
+    /// <summary>
+    /// Коннектор для системы управления учетными данными.
+    /// </summary>
     public class Connector : BaseDisposable, IConnector
     {
         private readonly ILogger _logger;
@@ -23,6 +26,14 @@ namespace Rubytech.Lib
 
         private readonly CancellationTokenSource _cancellationTokenSource = new();
 
+        /// <summary>
+        /// Инициализация коннектора.
+        /// </summary>
+        /// <param name="logger">Логгер.</param>
+        /// <param name="baseUrl">Базовый адрес ресурса.</param>
+        /// <param name="login">Логин для аутентификации.</param>
+        /// <param name="password">Пароль для аутентификации.</param>
+        /// <param name="archivePath">Путь до папки, в которую необходимо сохранить архив.</param>
         public Connector(
             ILogger logger, 
             string baseUrl, 
@@ -32,6 +43,7 @@ namespace Rubytech.Lib
         {
             _logger = logger;
 
+            // Инициализируем поставщика и архиватора данных и пытаемся получить данные.
             using var dataProvider = new RestDataProvider(baseUrl, login, password);
             using var dataArchiver = new ZipDataArchiver(archivePath, new MoscowTimeProvider());
 
@@ -40,6 +52,7 @@ namespace Rubytech.Lib
                 .GetResult();
         }
 
+        // Инициализация коннектора, включающая себя получение данных и, в случае успеха, их архивацию.
         private async Task InitializeAsync(
             IDataProvider dataProvider,
             IDataArchiver dataArchiver)
@@ -49,12 +62,19 @@ namespace Rubytech.Lib
                 throw new DataProviderNotConfiguredException();
             }
 
+            if (dataArchiver is null)
+            {
+                throw new DataArchiverNotConfiguredException();
+            }
+
             await InitializeDataAsync(dataProvider);
             await SaveDataToArchiveAsync(dataArchiver);
         }
 
+        // Сохранение полученных данных в архив.
         private async Task SaveDataToArchiveAsync(IDataArchiver dataArchiver)
         {
+            // Разделяем сохранение каждой коллекции, чтобы они делали это условно параллельно.
             IEnumerable<Task> tasks =
             [
                 dataArchiver.AddDataToEntryAsync(_employees, FileName.Employees),
@@ -67,6 +87,7 @@ namespace Rubytech.Lib
 
         private async Task InitializeDataAsync(IDataProvider dataProvider)
         {
+            // Разделяем получение данных, чтобы они делали это условно параллельно.
             IEnumerable<Task> tasks =
             [
                 InvokeCancellableTaskAsync(InitializeUnitsAsync(dataProvider)),
@@ -74,6 +95,7 @@ namespace Rubytech.Lib
                 InvokeCancellableTaskAsync(InitializePositionsAsync(dataProvider))
             ];
             
+            // В случае, если произошла некоторая ошибка - записываем её в лог и отдаем выше.
             try
             {
                 await Task.WhenAll(tasks);
@@ -86,6 +108,8 @@ namespace Rubytech.Lib
             }
         }
 
+        // Попытка выполнения задачи, которую можно отменить.
+        // В случае некоторой ошибки - отменяет токен, чтобы остальные задачи по получению данных остановились.
         private async Task InvokeCancellableTaskAsync(Task task)
         {
             try
@@ -100,6 +124,7 @@ namespace Rubytech.Lib
             }
         }
 
+        // Получение должностей.
         private async Task InitializePositionsAsync(IDataProvider dataProvider)
         {
             IEnumerable<Position> positions =
@@ -108,23 +133,28 @@ namespace Rubytech.Lib
             _positions = positions.ToList();
         }
 
+        // Получение подразделений.
         private async Task InitializeUnitsAsync(IDataProvider dataProvider)
         {
             IEnumerable<Unit> units = 
                 await dataProvider.GetUnitsAsync(_cancellationTokenSource.Token);
 
+            // Валидируем подразделения. Если валидация не пройдет - будет выброшено исключение.
             units.ValidateTree();
 
             _units = units.ToList();
         }
 
+        // Получение сотрудников.
         private async Task InitializeEmployeesAsync(IDataProvider dataProvider)
         {
             IEnumerable<Employee> employees = 
                 await dataProvider.GetEmployeesAsync(_cancellationTokenSource.Token);
 
-            await TaskHelper.WhenUntil(() => _units is null, _cancellationTokenSource.Token);
+            // Дожидаемся, когда будут получены подразделения, так как они нам нужны для валидации сотрудников.
+            await TaskHelper.WhenWhile(() => _units is null, _cancellationTokenSource.Token);
 
+            // Валидируем сотрудников. Если валидация не пройдет - будет выброшено исключение.
             employees = employees
                 .ValidateUnits(_units!)
                 .ValidateStartDates(_logger);

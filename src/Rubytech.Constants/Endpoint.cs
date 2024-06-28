@@ -1,5 +1,8 @@
 ﻿namespace Rubytech.Providers.Constants
 {
+    /// <summary>
+    /// Константы конечных точек.
+    /// </summary>
     public static class Endpoint
     {
         public const string Employees = "employees";

@@ -1,5 +1,8 @@
 ﻿namespace Rubytech.Archivers.Constants
 {
+    /// <summary>
+    /// Константы имен файлов.
+    /// </summary>
     public static class FileName
     {
         public const string Employees = "employees.json";

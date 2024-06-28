@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace Rubytech.Json.Converters
 {
+    /// <summary>
+    /// Json конвертер для получение <see cref="DateTime"/>? из <see cref="string"/>.
+    /// </summary>
     public class StringToNullableDateTimeConverter : JsonConverter<DateTime?>
     {
         public override DateTime? Read(
@@ -11,6 +14,7 @@ namespace Rubytech.Json.Converters
             Type typeToConvert, 
             JsonSerializerOptions options)
         {
+            // Если токен строка и мы можем конвертировать её в дату.
             if (reader.TokenType is JsonTokenType.String &&
                 DateTime.TryParse(
                     reader.GetString(), 
