@@ -1,19 +1,20 @@
 ﻿using Microsoft.Extensions.Logging;
 using Rubytech.Abstractions.BaseObjects;
+using Rubytech.Archivers;
+using Rubytech.Archivers.Interfaces;
 using Rubytech.Data.Models;
 using Rubytech.Lib.Exceptions;
 using Rubytech.Lib.Helpers;
 using Rubytech.Lib.ValidatorsExtensions;
 using Rubytech.Providers;
 using Rubytech.Providers.Interfaces;
+using Rubytech.TimeProviders;
 
 namespace Rubytech.Lib
 {
     public class Connector : BaseDisposable, IConnector
     {
         private readonly ILogger _logger;
-
-        private readonly IDataProvider _dataProvider;
 
         private IEnumerable<Employee>? _employees;
         private IEnumerable<Position>? _positions;
@@ -29,30 +30,49 @@ namespace Rubytech.Lib
             string archivePath)
         {
             _logger = logger;
-            _dataProvider = new RestDataProvider(baseUrl, login, password);
 
-            InitializeAsync().GetAwaiter().GetResult();
+            using var dataProvider = new RestDataProvider(baseUrl, login, password);
+            using var dataArchiver = new ZipDataArchiver(archivePath, new MoscowTimeProvider());
+
+            InitializeAsync(dataProvider, dataArchiver)
+                .GetAwaiter()
+                .GetResult();
         }
 
-        private async Task InitializeAsync()
+        private async Task InitializeAsync(
+            IDataProvider dataProvider,
+            IDataArchiver dataArchiver)
         {
-            if (_dataProvider is null)
+            if (dataProvider is null)
             {
                 throw new DataProviderNotConfiguredException();
             }
 
-            await InitializeDataAsync();
+            await InitializeDataAsync(dataProvider);
+            await SaveDataToArchiveAsync(dataArchiver);
         }
 
-        private async Task InitializeDataAsync()
+        private async Task SaveDataToArchiveAsync(IDataArchiver dataArchiver)
         {
             IEnumerable<Task> tasks =
             [
-                InvokeCancellableTaskAsync(InitializeUnitsAsync()),
-                InvokeCancellableTaskAsync(InitializeEmployeesAsync()),
-                InvokeCancellableTaskAsync(InitializePositionsAsync())
+                dataArchiver.AddDataToEntryAsync(_employees, "employees.json"),
+                dataArchiver.AddDataToEntryAsync(_positions, "positions.json"),
+                dataArchiver.AddDataToEntryAsync(_units, "units.json")
             ];
 
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task InitializeDataAsync(IDataProvider dataProvider)
+        {
+            IEnumerable<Task> tasks =
+            [
+                InvokeCancellableTaskAsync(InitializeUnitsAsync(dataProvider)),
+                InvokeCancellableTaskAsync(InitializeEmployeesAsync(dataProvider)),
+                InvokeCancellableTaskAsync(InitializePositionsAsync(dataProvider))
+            ];
+            
             try
             {
                 await Task.WhenAll(tasks);
@@ -79,28 +99,28 @@ namespace Rubytech.Lib
             }
         }
 
-        private async Task InitializePositionsAsync()
+        private async Task InitializePositionsAsync(IDataProvider dataProvider)
         {
             IEnumerable<Position> positions =
-                await _dataProvider.GetPositionsAsync(_cancellationTokenSource.Token);
+                await dataProvider.GetPositionsAsync(_cancellationTokenSource.Token);
 
             _positions = positions.ToList();
         }
 
-        private async Task InitializeUnitsAsync()
+        private async Task InitializeUnitsAsync(IDataProvider dataProvider)
         {
             IEnumerable<Unit> units = 
-                await _dataProvider.GetUnitsAsync(_cancellationTokenSource.Token);
+                await dataProvider.GetUnitsAsync(_cancellationTokenSource.Token);
 
             units.ValidateTree();
 
             _units = units.ToList();
         }
 
-        private async Task InitializeEmployeesAsync()
+        private async Task InitializeEmployeesAsync(IDataProvider dataProvider)
         {
             IEnumerable<Employee> employees = 
-                await _dataProvider.GetEmployeesAsync(_cancellationTokenSource.Token);
+                await dataProvider.GetEmployeesAsync(_cancellationTokenSource.Token);
 
             await TaskHelper.WhenUntil(() => _units is null, _cancellationTokenSource.Token);
 
@@ -132,7 +152,6 @@ namespace Rubytech.Lib
 
             if (disposing)
             {
-                _dataProvider?.Dispose();
                 _cancellationTokenSource?.Dispose();
             }
         }

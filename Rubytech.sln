@@ -5,17 +5,21 @@ VisualStudioVersion = 17.11.34929.205
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6D72207-7621-4716-8880-9D1DCDD970A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Data", "src\Rubytech.Data\Rubytech.Data.csproj", "{3EB89FB7-731D-4A60-B945-042B8DE1562D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rubytech.Data", "src\Rubytech.Data\Rubytech.Data.csproj", "{3EB89FB7-731D-4A60-B945-042B8DE1562D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Json", "src\Rubytech.Json\Rubytech.Json.csproj", "{574D907B-22F2-4E82-AA38-F9372A632B6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rubytech.Json", "src\Rubytech.Json\Rubytech.Json.csproj", "{574D907B-22F2-4E82-AA38-F9372A632B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Abstractions", "src\Rubytech.Abstractions\Rubytech.Abstractions.csproj", "{C8B89D03-696F-4FB5-8FEC-34BB9666AF91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rubytech.Abstractions", "src\Rubytech.Abstractions\Rubytech.Abstractions.csproj", "{C8B89D03-696F-4FB5-8FEC-34BB9666AF91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Network", "src\Rubytech.Network\Rubytech.Network.csproj", "{45B86A90-80DA-4597-8F8E-6F2D7398970D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rubytech.Network", "src\Rubytech.Network\Rubytech.Network.csproj", "{45B86A90-80DA-4597-8F8E-6F2D7398970D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Providers", "src\Rubytech.Providers\Rubytech.Providers.csproj", "{A81ED696-5A81-460D-B9E7-53418F9213EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rubytech.Providers", "src\Rubytech.Providers\Rubytech.Providers.csproj", "{A81ED696-5A81-460D-B9E7-53418F9213EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Lib", "src\Rubytech.Lib\Rubytech.Lib.csproj", "{7ECA5C25-2FDF-454C-A439-504653C0D3ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rubytech.Lib", "src\Rubytech.Lib\Rubytech.Lib.csproj", "{7ECA5C25-2FDF-454C-A439-504653C0D3ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.Archivers", "src\Rubytech.Archivers\Rubytech.Archivers.csproj", "{08AFCC87-D148-4848-A2CB-570CC5177A45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubytech.TimeProviders", "src\Rubytech.TimeProviders\Rubytech.TimeProviders.csproj", "{72473785-6DC2-426F-B88C-C70A5BA70318}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,14 @@ Global
 		{7ECA5C25-2FDF-454C-A439-504653C0D3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ECA5C25-2FDF-454C-A439-504653C0D3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ECA5C25-2FDF-454C-A439-504653C0D3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08AFCC87-D148-4848-A2CB-570CC5177A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08AFCC87-D148-4848-A2CB-570CC5177A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08AFCC87-D148-4848-A2CB-570CC5177A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08AFCC87-D148-4848-A2CB-570CC5177A45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72473785-6DC2-426F-B88C-C70A5BA70318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72473785-6DC2-426F-B88C-C70A5BA70318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72473785-6DC2-426F-B88C-C70A5BA70318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72473785-6DC2-426F-B88C-C70A5BA70318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +70,8 @@ Global
 		{45B86A90-80DA-4597-8F8E-6F2D7398970D} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 		{A81ED696-5A81-460D-B9E7-53418F9213EE} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 		{7ECA5C25-2FDF-454C-A439-504653C0D3ED} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
+		{08AFCC87-D148-4848-A2CB-570CC5177A45} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
+		{72473785-6DC2-426F-B88C-C70A5BA70318} = {C6D72207-7621-4716-8880-9D1DCDD970A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3952699C-8BB3-4ADA-B8DB-81F0AB800EB0}

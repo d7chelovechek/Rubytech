@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Rubytech.Archivers\Rubytech.Archivers.csproj" />
     <ProjectReference Include="..\Rubytech.Providers\Rubytech.Providers.csproj" />
   </ItemGroup>
 
